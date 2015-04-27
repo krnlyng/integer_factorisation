@@ -28,14 +28,14 @@ typedef mpz_class number;
 typedef unsigned long long int number;
 #endif
 
-std::tuple<number, number, bool> find_factors(number n, int current_digit, number first_factor_so_far, number second_factor_so_far, number b, number current_base)
+std::tuple<number, number, bool> find_factors(number n, int current_digit, number first_factor_so_far, number second_factor_so_far, number base, number current_base)
 {
-    for(number first_factor_digit = 0;first_factor_digit < b;first_factor_digit++)
+    for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
     {
-        for(number second_factor_digit = 0;second_factor_digit < b;second_factor_digit++)
+        for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
         {
-            number first_tmp = first_factor_digit * (current_base / b) + first_factor_so_far;
-            number second_tmp = second_factor_digit * (current_base / b) + second_factor_so_far;
+            number first_tmp = first_factor_digit * (current_base / base) + first_factor_so_far;
+            number second_tmp = second_factor_digit * (current_base / base) + second_factor_so_far;
             number d = n % current_base;
             number product = first_tmp * second_tmp;
             number product_mod = product % current_base;
@@ -47,7 +47,7 @@ std::tuple<number, number, bool> find_factors(number n, int current_digit, numbe
 
             if(d == product_mod && product != n)
             {
-                std::tuple<number, number, bool> factors = find_factors(n, current_digit + 1, first_tmp, second_tmp, b, current_base * b);
+                std::tuple<number, number, bool> factors = find_factors(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
                 if(std::get<0>(factors) * std::get<1>(factors) == n && std::get<2>(factors)) return std::move(factors);
             }
 

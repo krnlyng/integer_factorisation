@@ -28,7 +28,9 @@ typedef mpz_class number;
 typedef unsigned long long int number;
 #endif
 
-std::tuple<number, number, bool> find_factors(number n, int current_digit, number first_factor_so_far, number second_factor_so_far, number base, number current_base)
+using namespace std;
+
+tuple<number, number, bool> find_factors(number n, int current_digit, number first_factor_so_far, number second_factor_so_far, number base, number current_base)
 {
     for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
     {
@@ -47,8 +49,8 @@ std::tuple<number, number, bool> find_factors(number n, int current_digit, numbe
 
             if(d == product_mod && product != n)
             {
-                std::tuple<number, number, bool> factors = find_factors(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
-                if(std::get<0>(factors) * std::get<1>(factors) == n && std::get<2>(factors)) return std::move(factors);
+                tuple<number, number, bool> factors = find_factors(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
+                if(get<0>(factors) * get<1>(factors) == n && get<2>(factors)) return move(factors);
             }
 
             if(d == product_mod && product == n)
@@ -56,39 +58,39 @@ std::tuple<number, number, bool> find_factors(number n, int current_digit, numbe
                 /* don't use trivial factorisations */
                 if(first_tmp != 1 && second_tmp != 1)
                 {
-                    return std::make_tuple(first_tmp, second_tmp, true);
+                    return make_tuple(first_tmp, second_tmp, true);
                 }
             }
         }
     }
 
-    return std::make_tuple(1, n, false);
+    return make_tuple(1, n, false);
 }
 
-std::pair<number, number> factorize(number n)
+pair<number, number> factorize(number n)
 {
-    std::vector<number> factors;
+    vector<number> factors;
 
     if(n != 0)
     {
-        std::tuple<number, number, bool> r = find_factors(n, 0, 0, 0, 10, 10);
+        tuple<number, number, bool> r = find_factors(n, 0, 0, 0, 10, 10);
 
-        return std::make_pair(std::get<0>(r), std::get<1>(r));
+        return make_pair(get<0>(r), get<1>(r));
     }
     else
     {
-        return std::make_pair(1,0);
+        return make_pair(1,0);
     }
 }
 
 int main(int argc, char *argv[])
 {
     number n;
-    std::pair<number, number> factors;
+    pair<number, number> factors;
 
     if(argc != 2)
     {
-        std::cerr << "please specify one (positive integer) argument to this program" << std::endl;
+        cerr << "please specify one (positive integer) argument to this program" << endl;
         return -1;
     }
 
@@ -100,8 +102,8 @@ int main(int argc, char *argv[])
 
     factors = factorize(n);
 
-    std::cout << "n = " << n << " can be factorized as:" << std::endl;
-    std::cout << factors.first << " * " << factors.second << std::endl;
+    cout << "n = " << n << " can be factorized as:" << endl;
+    cout << factors.first << " * " << factors.second << endl;
 
     return 0;
 }

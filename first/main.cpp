@@ -53,6 +53,7 @@ std::tuple<number, number, bool> find_factors(number n, int current_digit, numbe
 
             if(d == product_mod && product == n)
             {
+                /* don't use trivial factorisations */
                 if(first_tmp != 1 && second_tmp != 1)
                 {
                     return std::make_tuple(first_tmp, second_tmp, true);

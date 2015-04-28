@@ -30,17 +30,25 @@ typedef unsigned long long int number;
 
 using namespace std;
 
-tuple<number, number, bool> find_factors(number n, int current_digit, number first_factor_so_far, number second_factor_so_far, number base, number current_base)
+tuple<number, number, bool> find_factors(const number &n, const int &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base)
 {
+    number first_tmp;
+    number second_tmp;
+    number d;
+    number product;
+    number product_mod;
+
     for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
     {
         for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
         {
-            number first_tmp = first_factor_digit * (current_base / base) + first_factor_so_far;
-            number second_tmp = second_factor_digit * (current_base / base) + second_factor_so_far;
-            number d = n % current_base;
-            number product = first_tmp * second_tmp;
-            number product_mod = product % current_base;
+            first_tmp = first_factor_digit * (current_base / base) + first_factor_so_far;
+            second_tmp = second_factor_digit * (current_base / base) + second_factor_so_far;
+
+            d = n % current_base;
+
+            product = first_tmp * second_tmp;
+            product_mod = product % current_base;
 
             if(product > n)
             {
@@ -67,7 +75,7 @@ tuple<number, number, bool> find_factors(number n, int current_digit, number fir
     return make_tuple(1, n, false);
 }
 
-pair<number, number> factorize(number n)
+pair<number, number> factorize(const number &n)
 {
     vector<number> factors;
 

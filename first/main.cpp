@@ -77,8 +77,6 @@ tuple<number, number, bool> find_factors(const number &n, const int &current_dig
 
 pair<number, number> factorize(const number &n)
 {
-    vector<number> factors;
-
     if(n != 0)
     {
         tuple<number, number, bool> r = find_factors(n, 0, 0, 0, 10, 10);

@@ -58,7 +58,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
             if(d == product_mod && product != n)
             {
                 tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
-                if(get<0>(factors) * get<1>(factors) == n && get<2>(factors)) return move(factors);
+                if(get<2>(factors)) return move(factors);
             }
 
             if(d == product_mod && product == n)

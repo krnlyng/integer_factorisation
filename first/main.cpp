@@ -108,8 +108,15 @@ int main(int argc, char *argv[])
 
     factors = factorize(n);
 
-    cout << "n = " << n << " can be factorized as:" << endl;
-    cout << factors.first << " * " << factors.second << endl;
+    if(factors.first == 1 || factors.second == 1)
+    {
+        cout << "n = " << n << " is prime." << endl;
+    }
+    else
+    {
+        cout << "n = " << n << " can be factorized as:" << endl;
+        cout << factors.first << " * " << factors.second << endl;
+    }
 
     return 0;
 }

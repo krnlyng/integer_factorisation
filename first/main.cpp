@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
 
     factors = factorize(n);
 
-    if(factors.first == 1 || factors.second == 1)
+    if((factors.first == 1 || factors.second == 1) && !(factors.first == factors.second))
     {
         cout << "n = " << n << " is prime." << endl;
     }

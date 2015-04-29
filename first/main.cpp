@@ -30,7 +30,7 @@ typedef unsigned long long int number;
 
 using namespace std;
 
-tuple<number, number, bool> find_factors(const number &n, const int &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base)
+tuple<number, number, bool> find_next_digits(const number &n, const int &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base)
 {
     number first_tmp;
     number second_tmp;
@@ -57,7 +57,7 @@ tuple<number, number, bool> find_factors(const number &n, const int &current_dig
 
             if(d == product_mod && product != n)
             {
-                tuple<number, number, bool> factors = find_factors(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
+                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
                 if(get<0>(factors) * get<1>(factors) == n && get<2>(factors)) return move(factors);
             }
 
@@ -79,7 +79,7 @@ pair<number, number> factorize(const number &n)
 {
     if(n != 0)
     {
-        tuple<number, number, bool> r = find_factors(n, 0, 0, 0, 10, 10);
+        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, 10, 10);
 
         return make_pair(get<0>(r), get<1>(r));
     }

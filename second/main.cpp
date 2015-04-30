@@ -53,7 +53,7 @@ inline number get_digit(const number &x, const digit_counter &digit_number, cons
     }
     else
     {
-        return (x / (number)my_pow(base, digit_number)) % base;
+        return (x / my_pow(base, digit_number)) % base;
     }
 }
 

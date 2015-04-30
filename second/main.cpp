@@ -44,7 +44,7 @@ number my_pow(const number &x, const digit_counter &y)
 #define my_pow(...) (number)pow(__VA_ARGS__)
 #endif
 
-/* this function returns the digit_counter-th digit of x in base base) */
+/* this function returns the digit_number-th digit of x in base base) */
 number get_digit(const number &x, const digit_counter &digit_number, const number &base)
 {
     if(base == 2)
@@ -55,6 +55,13 @@ number get_digit(const number &x, const digit_counter &digit_number, const numbe
     {
         return (x / (number)my_pow(base, digit_number)) % base;
     }
+}
+
+/* this function sets the left-most digit of x to digit in base base
+ * (if the digit_number-th digit of x is zero otherwise garbage)*/
+void set_digit(number &x, const number &digit, const number &digit_base)
+{
+    x += digit * digit_base;
 }
 
 /* this function checks if the new digits solve the digit equation for digit number current_digit
@@ -81,7 +88,7 @@ pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n, con
     return make_pair(false, 0);
 }
 
-tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &carry)
+tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base, const number &carry)
 {
     number a;
     number b;
@@ -92,8 +99,10 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     {
         for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
         {
-            a = first_factor_digit * (current_base / base) + first_factor_so_far;
-            b = second_factor_digit * (current_base / base) + second_factor_so_far;
+            a = first_factor_so_far;
+            b = second_factor_so_far;
+            set_digit(a, first_factor_digit, previous_base);
+            set_digit(b, second_factor_digit, previous_base);
 
             check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base);
 
@@ -116,7 +125,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
                 }
                 else
                 {
-                    tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, a, b, base, current_base * base, check.second);
+                    tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, a, b, base, current_base * base, previous_base * base, check.second);
                     if(get<2>(factors)) return move(factors);
                 }
             }
@@ -130,7 +139,7 @@ pair<number, number> factorize(const number &n)
 {
     if(n != 0)
     {
-        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, 10, 10, 0);
+        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, 10, 10, 1, 0);
 
         return make_pair(get<0>(r), get<1>(r));
     }

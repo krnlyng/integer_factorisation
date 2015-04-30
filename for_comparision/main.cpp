@@ -6,7 +6,7 @@ using namespace std;
 #include <gmpxx.h>
 typedef mpz_class number;
 #else
-typedef unsigned long long int number
+typedef unsigned long long int number;
 #endif
 
 #if USE_GMP
@@ -17,6 +17,7 @@ number my_sqrt(const number &n)
     return r;
 }
 #else
+#include <cmath>
 #define my_sqrt(...) (number)sqrt(__VA_ARGS__)
 #endif
 

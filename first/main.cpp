@@ -32,7 +32,7 @@ using namespace std;
 
 /* this function sets the left-most digit of x to digit in base base
  * (if the digit_number-th digit of x is zero otherwise garbage)*/
-void set_digit(number &x, const number &digit, const number &digit_base)
+inline void set_digit(number &x, const number &digit, const number &digit_base)
 {
     x += digit * digit_base;
 }

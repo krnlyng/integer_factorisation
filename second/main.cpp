@@ -34,7 +34,7 @@ typedef unsigned long int digit_counter;
 
 /* this function returns x^y */
 #if USE_GMP
-number my_pow(const number &x, const digit_counter &y)
+inline number my_pow(const number &x, const digit_counter &y)
 {
     mpz_class r;
     mpz_pow_ui(r.get_mpz_t(), x.get_mpz_t(), y);
@@ -45,7 +45,7 @@ number my_pow(const number &x, const digit_counter &y)
 #endif
 
 /* this function returns the digit_number-th digit of x in base base) */
-number get_digit(const number &x, const digit_counter &digit_number, const number &base)
+inline number get_digit(const number &x, const digit_counter &digit_number, const number &base)
 {
     if(base == 2)
     {
@@ -59,14 +59,14 @@ number get_digit(const number &x, const digit_counter &digit_number, const numbe
 
 /* this function sets the left-most digit of x to digit in base base
  * (if the digit_number-th digit of x is zero otherwise garbage)*/
-void set_digit(number &x, const number &digit, const number &digit_base)
+inline void set_digit(number &x, const number &digit, const number &digit_base)
 {
     x += digit * digit_base;
 }
 
 /* this function checks if the new digits solve the digit equation for digit number current_digit
  * and returns a pair consisting of the check and the new carry */
-pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n, const number &first_factor_so_far, const number &second_factor_so_far, const number &carry, const digit_counter &current_digit, const number &base)
+inline pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n, const number &first_factor_so_far, const number &second_factor_so_far, const number &carry, const digit_counter &current_digit, const number &base)
 {
     number tmp = 0;
     number new_carry = 0;

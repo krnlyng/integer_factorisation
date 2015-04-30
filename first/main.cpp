@@ -30,7 +30,14 @@ typedef unsigned long long int number;
 
 using namespace std;
 
-tuple<number, number, bool> find_next_digits(const number &n, const int &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base)
+/* this function sets the left-most digit of x to digit in base base
+ * (if the digit_number-th digit of x is zero otherwise garbage)*/
+void set_digit(number &x, const number &digit, const number &digit_base)
+{
+    x += digit * digit_base;
+}
+
+tuple<number, number, bool> find_next_digits(const number &n, const int &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base)
 {
     number first_tmp;
     number second_tmp;
@@ -42,8 +49,10 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
     {
         for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
         {
-            first_tmp = first_factor_digit * (current_base / base) + first_factor_so_far;
-            second_tmp = second_factor_digit * (current_base / base) + second_factor_so_far;
+            first_tmp = first_factor_so_far;
+            second_tmp = second_factor_so_far;
+            set_digit(first_tmp, first_factor_digit, previous_base);
+            set_digit(second_tmp, second_factor_digit, previous_base);
 
             d = n % current_base;
 
@@ -57,7 +66,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
 
             if(d == product_mod && product != n)
             {
-                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base);
+                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base, previous_base * base);
                 if(get<2>(factors)) return move(factors);
             }
 
@@ -79,7 +88,7 @@ pair<number, number> factorize(const number &n)
 {
     if(n != 0)
     {
-        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, 10, 10);
+        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, 10, 10, 1);
 
         return make_pair(get<0>(r), get<1>(r));
     }

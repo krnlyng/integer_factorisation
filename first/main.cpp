@@ -66,7 +66,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
 
             if(d == product_mod && product != n)
             {
-                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base, previous_base * base);
+                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base, current_base);
                 if(get<2>(factors)) return move(factors);
             }
 

@@ -28,7 +28,7 @@ using namespace std;
 typedef mpz_class number;
 typedef unsigned long int digit_counter;
 #else
-typedef unsigned long long int number
+typedef unsigned long long int number;
 typedef unsigned long int digit_counter;
 #endif
 
@@ -41,6 +41,7 @@ inline number my_pow(const number &x, const digit_counter &y)
     return r;
 }
 #else
+#include <cmath>
 #define my_pow(...) (number)pow(__VA_ARGS__)
 #endif
 

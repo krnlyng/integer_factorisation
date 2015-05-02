@@ -1,5 +1,5 @@
 OUT         := factorisation
-SRC         := main.cpp
+SRC         := main.cpp ../common/common.cpp
 OBJ         := $(patsubst %.c, %.o, $(filter %.c, $(SRC)))
 OBJ         += $(patsubst %.cpp, %.o, $(filter %.cpp, $(SRC)))
 DEP         := $(OBJ:.o=.d)

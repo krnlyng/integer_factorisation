@@ -207,7 +207,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
             if(inverse.first)
             {
                 tmp += carry;
-                second_factor_digit = (inverse.second * (get_digit(n, current_digit, base) - tmp));
+                second_factor_digit = (inverse.second * (get_digit(n, current_digit, base) - tmp)) % base;
 
                 while(second_factor_digit < 0) second_factor_digit += base;
 

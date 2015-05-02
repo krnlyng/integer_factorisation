@@ -250,6 +250,7 @@ void usage(char *name)
     cout << "\t\tspecified base = 2 will be used." << endl;
     cout << "\tnumber\tis the number which shall be factorised." << endl;
     cout << "both arguments must be positive." << endl;
+    cout << "base must be prime." << endl;
 }
 
 int main(int argc, char *argv[])
@@ -285,6 +286,12 @@ int main(int argc, char *argv[])
     }
 
     if(base < 0 || n < 0)
+    {
+        usage(argv[0]);
+        return -3;
+    }
+
+    if(!is_prime(base))
     {
         usage(argv[0]);
         return -3;

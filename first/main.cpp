@@ -105,6 +105,7 @@ void usage(char *name)
     cout << "\tbase\tis the base with which the algorithm should calculate, if not" << endl;
     cout << "\t\tspecified base = 2 will be used." << endl;
     cout << "\tnumber\tis the number which shall be factorized." << endl;
+    cout << "both arguments must be positive." << endl;
 }
 
 int main(int argc, char *argv[])
@@ -125,7 +126,7 @@ int main(int argc, char *argv[])
 #if USE_GMP
         n = argv[1];
 #else
-        n = strtoll(argv[1], NULL, 10);
+        n = strtoull(argv[1], NULL, 10);
 #endif
     }
     else
@@ -137,6 +138,12 @@ int main(int argc, char *argv[])
         base = strtoull(argv[1], NULL, 10);
         n = strtoull(argv[2], NULL, 10);
 #endif
+    }
+
+    if(base < 0 || n < 0)
+    {
+        usage(argv[0]);
+        return -3;
     }
 
     factors = factorize(n, base);

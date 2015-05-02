@@ -37,6 +37,12 @@ inline void set_digit(number &x, const number &digit, const number &digit_base)
     x += digit * digit_base;
 }
 
+/* this function returns true if x is odd and false otherwise */
+inline bool is_odd(const number &x)
+{
+    return ((x & 1) == 1);
+}
+
 tuple<number, number, bool> find_next_digits(const number &n, const int &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base)
 {
     number first_tmp;
@@ -45,9 +51,11 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
     number product;
     number product_mod;
 
-    for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
+    /* current_digit == 0 optimisations: one factor has to be even if the product is even and both must be odd if the product is odd */
+    for(number first_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;first_factor_digit < base;first_factor_digit += (current_digit == 0) ? 2 : 1)
     {
-        for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
+        for(number second_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;second_factor_digit < base;second_factor_digit += (current_digit == 0 && is_odd(n)) ? 2 : 1)
+
         {
             first_tmp = first_factor_so_far;
             second_tmp = second_factor_so_far;

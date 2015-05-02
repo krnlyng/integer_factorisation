@@ -72,6 +72,7 @@ inline pair<bool, number> check_if_new_digits_solve_digit_equation(const number 
     number tmp = 0;
     number new_carry = 0;
 
+    /* current_digit == 0 optimisations: one factor has to be even if the product is even and both must be odd if the product is odd */
     for(digit_counter i = 0;i <= current_digit;i++)
     {
         tmp += get_digit(first_factor_so_far, i, base) * get_digit(second_factor_so_far, current_digit - i, base);
@@ -89,6 +90,12 @@ inline pair<bool, number> check_if_new_digits_solve_digit_equation(const number 
     return make_pair(false, 0);
 }
 
+/* this function returns true if x is odd and false otherwise */
+inline bool is_odd(const number &x)
+{
+    return ((x & 1) == 1);
+}
+
 tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base, const number &carry)
 {
     number a;
@@ -96,9 +103,9 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     number product;
     pair<bool, number> check;
 
-    for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
+    for(number first_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;first_factor_digit < base;first_factor_digit += (current_digit == 0) ? 2 : 1)
     {
-        for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
+        for(number second_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;second_factor_digit < base;second_factor_digit += (current_digit == 0 && is_odd(n)) ? 2 : 1)
         {
             a = first_factor_so_far;
             b = second_factor_so_far;

@@ -21,7 +21,7 @@ number my_sqrt(const number &n)
 #define my_sqrt(...) (number)sqrt(__VA_ARGS__)
 #endif
 
-pair<number, number> factorize(const number &n)
+pair<number, number> factorise(const number &n)
 {
     for(number x = 2;x <= my_sqrt(n);x++)
     {
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     n = strtoll(argv[1], NULL, 10);
 #endif
 
-    factors = factorize(n);
+    factors = factorise(n);
 
     if((factors.first == 1 || factors.second == 1) && !(factors.first == factors.second))
     {
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << "n = " << n << " can be factorized as:" << endl;
+        cout << "n = " << n << " can be factorised as:" << endl;
         cout << factors.first << " * " << factors.second << endl;
     }
 

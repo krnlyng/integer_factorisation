@@ -84,7 +84,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
     return make_tuple(1, n, false);
 }
 
-pair<number, number> factorize(const number &n, const number &base)
+pair<number, number> factorise(const number &n, const number &base)
 {
     if(n != 0)
     {
@@ -104,7 +104,7 @@ void usage(char *name)
     cout << name << " [base] number" << endl;
     cout << "\tbase\tis the base with which the algorithm should calculate, if not" << endl;
     cout << "\t\tspecified base = 2 will be used." << endl;
-    cout << "\tnumber\tis the number which shall be factorized." << endl;
+    cout << "\tnumber\tis the number which shall be factorised." << endl;
     cout << "both arguments must be positive." << endl;
 }
 
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
         return -3;
     }
 
-    factors = factorize(n, base);
+    factors = factorise(n, base);
 
     if((factors.first == 1 || factors.second == 1) && !(factors.first == factors.second))
     {
@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << "n = " << n << " can be factorized as:" << endl;
+        cout << "n = " << n << " can be factorised as:" << endl;
         cout << factors.first << " * " << factors.second << endl;
     }
 

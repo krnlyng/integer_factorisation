@@ -51,6 +51,8 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
     number product;
     number product_mod;
 
+    d = n % current_base;
+
     /* current_digit == 0 optimisations: one factor has to be even if the product is even and both must be odd if the product is odd */
     for(number first_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;first_factor_digit < base;first_factor_digit += (current_digit == 0) ? 2 : 1)
     {
@@ -61,8 +63,6 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
             second_tmp = second_factor_so_far;
             set_digit(first_tmp, first_factor_digit, previous_base);
             set_digit(second_tmp, second_factor_digit, previous_base);
-
-            d = n % current_base;
 
             product = first_tmp * second_tmp;
             product_mod = product % current_base;
@@ -78,7 +78,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const int &current
                 if(get<2>(factors)) return move(factors);
             }
 
-            if(d == product_mod && product == n)
+            if(product == n)
             {
                 /* don't use trivial factorisations */
                 if(first_tmp != 1 && second_tmp != 1)

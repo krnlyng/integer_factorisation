@@ -22,6 +22,7 @@ VERBOSE     ?= 0
 ifeq ($(DEBUG),1)
 	CFLAGS += -O0 -g3 -ggdb -pg
 	CXXFLAGS += -O0 -g3 -ggdb -pg
+	LDFLAGS += -pg
 endif
 
 ifeq ($(VERBOSE),1)
@@ -40,7 +41,7 @@ release: $(OUT)
 
 clean:
 	$(MSG) -e "\tCLEAN\t"
-	$(CMD)$(RM) $(OBJ) $(DEP) $(OUT)
+	$(CMD)$(RM) $(OBJ) $(DEP) $(OUT) gmon.out
 
 $(OUT): $(OBJ)
 	$(MSG) -e "\tLINK\t$@"

@@ -120,19 +120,6 @@ bool is_odd(const number &x)
     return ((x & 1) == 1);
 }
 
-pair<number, number> trialdivision_factorise(const number &n)
-{
-    for(number x = 2;x <= my_sqrt(n);x++)
-    {
-        if(n % x == 0)
-        {
-            return make_pair(x, n / x);
-        }
-    }
-
-    return make_pair(1, n);
-}
-
 pair<number, number> factorise(const number &n, const number &base)
 {
     if(n != 0)
@@ -143,7 +130,7 @@ pair<number, number> factorise(const number &n, const number &base)
     }
     else
     {
-        return make_pair(1,0);
+        return make_pair(1, 0);
     }
 }
 
@@ -217,7 +204,7 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division)
         }
     }
 
-    factors = trial_division ? trialdivision_factorise(n) : factorise(n, base);
+    factors = factorise(n, base);
 
     if((factors.first == 1 || factors.second == 1) && !(factors.first == factors.second))
     {

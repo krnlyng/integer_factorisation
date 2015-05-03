@@ -53,8 +53,6 @@ std::pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n
 
 bool is_odd(const number &x);
 
-std::pair<number, number> trialdivision_factorise(const number &n);
-
 std::pair<number, number> factorise(const number &n, const number &base = 2);
 
 void usage(char *name, bool prime_base);

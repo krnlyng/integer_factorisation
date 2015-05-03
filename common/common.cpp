@@ -177,7 +177,7 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division)
     number base;
     pair<number, number> factors;
 
-    if(argc != 2 && (argc != 3 && trial_division))
+    if(argc != 2 && (argc != 3 || trial_division))
     {
         usage(argv[0], prime_base, trial_division);
         return -1;

@@ -32,9 +32,9 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     number product;
     pair<bool, number> check;
 
-    for(number first_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;first_factor_digit < base;first_factor_digit += (current_digit == 0) ? 2 : 1)
+    for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
     {
-        for(number second_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;second_factor_digit < base;second_factor_digit += (current_digit == 0 && is_odd(n)) ? 2 : 1)
+        for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
         {
             a = first_factor_so_far;
             b = second_factor_so_far;

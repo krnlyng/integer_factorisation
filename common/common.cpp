@@ -96,7 +96,6 @@ pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n, con
     number tmp = 0;
     number new_carry = 0;
 
-    /* current_digit == 0 optimisations: one factor has to be even if the product is even and both must be odd if the product is odd */
     for(digit_counter i = 0;i <= current_digit;i++)
     {
         tmp += get_digit(first_factor_so_far, i, base) * get_digit(second_factor_so_far, current_digit - i, base);

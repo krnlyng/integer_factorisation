@@ -36,8 +36,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     number a_0th_digit;
     pair<bool, number> inverse;
 
-    /* current_digit == 0 optimisations: one factor has to be even if the product is even and both must be odd if the product is odd */
-    for(number first_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;first_factor_digit < base;first_factor_digit += (current_digit == 0) ? 2 : 1)
+    for(number first_factor_digit = 0;first_factor_digit < base;first_factor_digit++)
     {
         a = first_factor_so_far;
         set_digit(a, first_factor_digit, previous_base);
@@ -46,7 +45,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
         if(a_0th_digit == 0)
         {
             pair<bool, number> check;
-            for(second_factor_digit = (current_digit == 0 && is_odd(n)) ? 1 : 0;second_factor_digit < base;second_factor_digit += (current_digit == 0 && is_odd(n)) ? 2 : 1)
+            for(second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
             {
                 b = second_factor_so_far;
                 set_digit(b, second_factor_digit, previous_base);

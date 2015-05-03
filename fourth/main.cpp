@@ -104,14 +104,14 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
 
                 set_digit(b, second_factor_digit, previous_base);
                 new_carry = (tmp + a_0th_digit * second_factor_digit) / base;
-               
+
                 product = a * b;
 
                 product_mod = product % current_base;
 
                 if(product > n)
                 {
-                    break;
+                    continue;
                 }
 
                 if(product == n)

@@ -103,7 +103,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
 
                 if(product > n)
                 {
-                    break;
+                    continue;
                 }
 
                 if(product == n)

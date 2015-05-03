@@ -27,8 +27,8 @@ using namespace std;
 
 tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base, const number &carry)
 {
-    number first_tmp;
-    number second_tmp;
+    number a;
+    number b;
     number d;
     number product;
     number product_mod;
@@ -42,12 +42,12 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     {
         for(number second_factor_digit = 0;second_factor_digit < base;second_factor_digit++)
         {
-            first_tmp = first_factor_so_far;
-            second_tmp = second_factor_so_far;
-            set_digit(first_tmp, first_factor_digit, previous_base);
-            set_digit(second_tmp, second_factor_digit, previous_base);
+            a = first_factor_so_far;
+            b = second_factor_so_far;
+            set_digit(a, first_factor_digit, previous_base);
+            set_digit(b, second_factor_digit, previous_base);
 
-            product = first_tmp * second_tmp;
+            product = a * b;
             product_mod = product % current_base;
 
             if(product > n)
@@ -57,16 +57,16 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
 
             if(d == product_mod && product != n)
             {
-                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, first_tmp, second_tmp, base, current_base * base, current_base, 0);
+                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, a, b, base, current_base * base, current_base, 0);
                 if(get<2>(factors)) return move(factors);
             }
 
             if(product == n)
             {
                 /* don't use trivial factorisations */
-                if(first_tmp != 1 && second_tmp != 1)
+                if(a != 1 && b != 1)
                 {
-                    return make_tuple(first_tmp, second_tmp, true);
+                    return make_tuple(a, b, true);
                 }
             }
         }

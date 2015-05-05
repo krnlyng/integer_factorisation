@@ -1,8 +1,8 @@
 /*
  * A slightly improved trial division algorithm which skips integers which can
  * never be a factor of the starting number.
- *  Copyright (C) 2015 Franz-Josef Anton Friedrich Haider
- *  Copyright (C) 2015 Lorenz Oberhammer
+ *  Copyright (C) 2015 Franz-Josef Anton Friedrich Haider (idea, implementation)
+ *  Copyright (C) 2015 Lorenz Oberhammer (proofs)
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

@@ -1,7 +1,7 @@
 /*
  *  A combination of our first and third factorisation algorithms.
- *  Copyright (C) 2015 Franz-Josef Anton Friedrich Haider
- *  Copyright (C) 2015 Lorenz Oberhammer
+ *  Copyright (C) 2015 Franz-Josef Anton Friedrich Haider (idea, implementation)
+ *  Copyright (C) 2015 Lorenz Oberhammer (proofs)
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

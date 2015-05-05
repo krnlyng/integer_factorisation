@@ -84,6 +84,8 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
         current_increment++;
     }
 
+    cout << "calculated increments." << endl;
+
 trial_division:
     for(number x = possible_first_digits[current_increment];x <= my_sqrt(n);x+=increments[current_increment % (increments.size() + 1)], current_increment++)
     {

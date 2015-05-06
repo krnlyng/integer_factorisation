@@ -136,6 +136,8 @@ void usage(char *name, bool prime_base, bool trial_division, bool use_steps)
         cout << "\tnumber\tis the number which shall be factorised." << endl;
         cout << "\tsteps\tis the number of iterations for the digit determination which" << endl;
         cout << "\t\tshould be done, if not specified steps = 1 will be used" << endl;
+        cout << "base must be greater than or equal to 2." << endl;
+        cout << "steps must be positive." << endl;
     }
     else
     {
@@ -143,9 +145,9 @@ void usage(char *name, bool prime_base, bool trial_division, bool use_steps)
         cout << "\tbase\tis the base with which the algorithm should calculate, if not" << endl;
         cout << "\t\tspecified base = 2 will be used." << endl;
         cout << "\tnumber\tis the number which shall be factorised." << endl;
+        cout << "base must be greater than or equal to 2." << endl;
     }
-
-    cout << "all arguments must be positive." << endl;
+    cout << "number must be positive." << endl;
 
     if(prime_base)
     {
@@ -198,7 +200,7 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division, bo
 #endif
     }
 
-    if(base < 0 || n < 0 || steps < 0)
+    if(base < 2 || n < 1 || steps < 1)
     {
         usage(argv[0], prime_base, trial_division, use_steps);
         return -3;

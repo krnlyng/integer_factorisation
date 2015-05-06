@@ -51,9 +51,9 @@ std::pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n
 
 bool is_odd(const number &x);
 
-extern std::pair<number, number> factorise(const number &n, const number &base = 2);
+extern std::pair<number, number> factorise(const number &n, const number &base = 2, const digit_counter &steps = 1);
 
 void usage(char *name, bool prime_base);
 
-int common_main(int argc, char *argv[], bool prime_base, bool trial_division);
+int common_main(int argc, char *argv[], bool prime_base, bool trial_division, bool use_steps);
 

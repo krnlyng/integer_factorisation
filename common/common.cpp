@@ -120,14 +120,22 @@ bool is_odd(const number &x)
     return ((x & 1) == 1);
 }
 
-void usage(char *name, bool prime_base, bool trial_division)
+void usage(char *name, bool prime_base, bool trial_division, bool use_steps)
 {
     cout << "usage:" << endl;
     if(trial_division)
     {
         cout << name << " number" << endl;
         cout << "\tnumber\tis the number which shall be factorised." << endl;
-        cout << "number must be positive." << endl;
+    }
+    else if(use_steps)
+    {
+        cout << name << " [base [steps]] number" << endl;
+        cout << "\tbase\tis the base with which the algorithm should calculate, if not" << endl;
+        cout << "\t\tspecified base = 2 will be used." << endl;
+        cout << "\tnumber\tis the number which shall be factorised." << endl;
+        cout << "\tsteps\tis the number of iterations for the digit determination which" << endl;
+        cout << "\t\tshould be done, if not specified steps = 1 will be used" << endl;
     }
     else
     {
@@ -135,23 +143,26 @@ void usage(char *name, bool prime_base, bool trial_division)
         cout << "\tbase\tis the base with which the algorithm should calculate, if not" << endl;
         cout << "\t\tspecified base = 2 will be used." << endl;
         cout << "\tnumber\tis the number which shall be factorised." << endl;
-        cout << "both arguments must be positive." << endl;
     }
+
+    cout << "all arguments must be positive." << endl;
+
     if(prime_base)
     {
         cout << "base must be prime." << endl;
     }
 }
 
-int common_main(int argc, char *argv[], bool prime_base, bool trial_division)
+int common_main(int argc, char *argv[], bool prime_base, bool trial_division, bool use_steps)
 {
     number n;
     number base;
+    digit_counter steps = 1;
     pair<number, number> factors;
 
-    if(argc != 2 && (argc != 3 || trial_division))
+    if(argc != 2 && (argc != 3 || trial_division) && (argc != 4 || !use_steps))
     {
-        usage(argv[0], prime_base, trial_division);
+        usage(argv[0], prime_base, trial_division, use_steps);
         return -1;
     }
 
@@ -164,7 +175,19 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division)
         n = strtoull(argv[1], NULL, 10);
 #endif
     }
-    else if(!trial_division)
+    else if(argc == 4)
+    {
+#if USE_GMP
+        base = argv[1];
+        steps = strtoull(argv[2], NULL, 10);
+        n = argv[3];
+#else
+        base = strtoull(argv[1], NULL, 10);
+        steps = strtoull(argv[2], NULL, 10);
+        n = strtoull(argv[3], NULL, 10);
+#endif
+    }
+    else if(argc == 3)
     {
 #if USE_GMP
         base = argv[1];
@@ -175,9 +198,9 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division)
 #endif
     }
 
-    if(base < 0 || n < 0)
+    if(base < 0 || n < 0 || steps < 0)
     {
-        usage(argv[0], prime_base, trial_division);
+        usage(argv[0], prime_base, trial_division, use_steps);
         return -3;
     }
 
@@ -185,12 +208,12 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division)
     {
         if(!is_prime(base))
         {
-            usage(argv[0], prime_base, trial_division);
+            usage(argv[0], prime_base, trial_division, use_steps);
             return -3;
         }
     }
 
-    factors = factorise(n, base);
+    factors = factorise(n, base, steps);
 
     if((factors.first == 1 || factors.second == 1) && !(factors.first == factors.second))
     {

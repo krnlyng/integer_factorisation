@@ -24,7 +24,7 @@
 
 using namespace std;
 
-pair<number, number> factorise(const number &n, const number &base)
+pair<number, number> factorise(const number &n, const number &base, const digit_counter &steps)
 {
     for(number x = 2;x <= my_sqrt(n);x++)
     {
@@ -39,6 +39,6 @@ pair<number, number> factorise(const number &n, const number &base)
 
 int main(int argc, char *argv[])
 {
-    common_main(argc, argv, false, true);
+    common_main(argc, argv, false, true, false);
 }
 

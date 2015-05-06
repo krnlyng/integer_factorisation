@@ -134,8 +134,11 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     return make_tuple(1, n, false);
 }
 
-pair<number, number> factorise(const number &n, const number &base)
+pair<number, number> factorise(const number &n, const number &base, const digit_counter &steps)
 {
+    // not used
+    (void)steps;
+
     if(n != 0)
     {
         tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, base, base, 1, 0);
@@ -150,6 +153,6 @@ pair<number, number> factorise(const number &n, const number &base)
 
 int main(int argc, char *argv[])
 {
-    return common_main(argc, argv, true, false);
+    return common_main(argc, argv, true, false, false);
 }
 

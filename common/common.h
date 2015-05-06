@@ -44,8 +44,6 @@ std::pair<bool, number> find_inverse(const number &x, const number &mod);
 
 bool is_prime(const number &n);
 
-extern std::tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base, const number &carry);
-
 void set_digit(number &x, const number &digit, const number &digit_base);
 number get_digit(const number &x, const digit_counter &digit_number, const number &base);
 
@@ -53,7 +51,7 @@ std::pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n
 
 bool is_odd(const number &x);
 
-std::pair<number, number> factorise(const number &n, const number &base = 2);
+extern std::pair<number, number> factorise(const number &n, const number &base = 2);
 
 void usage(char *name, bool prime_base);
 

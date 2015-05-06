@@ -25,16 +25,13 @@
 
 using namespace std;
 
-tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base, const number &carry)
+tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base)
 {
     number a;
     number b;
     number d;
     number product;
     number product_mod;
-
-    /* not used */
-    (void)carry;
 
     d = n % current_base;
 
@@ -57,7 +54,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
 
             if(d == product_mod && product != n)
             {
-                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, a, b, base, current_base * base, current_base, 0);
+                tuple<number, number, bool> factors = find_next_digits(n, current_digit + 1, a, b, base, current_base * base, current_base);
                 if(get<2>(factors)) return move(factors);
             }
 
@@ -73,6 +70,20 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     }
 
     return make_tuple(1, n, false);
+}
+
+pair<number, number> factorise(const number &n, const number &base)
+{
+    if(n != 0)
+    {
+        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, base, base, 1);
+
+        return make_pair(get<0>(r), get<1>(r));
+    }
+    else
+    {
+        return make_pair(1, 0);
+    }
 }
 
 int main(int argc, char *argv[])

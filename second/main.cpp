@@ -72,6 +72,20 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     return make_tuple(1, n, false);
 }
 
+pair<number, number> factorise(const number &n, const number &base)
+{
+    if(n != 0)
+    {
+        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, base, base, 1, 0);
+
+        return make_pair(get<0>(r), get<1>(r));
+    }
+    else
+    {
+        return make_pair(1, 0);
+    }
+}
+
 int main(int argc, char *argv[])
 {
     return common_main(argc, argv, false, false);

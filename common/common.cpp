@@ -120,20 +120,6 @@ bool is_odd(const number &x)
     return ((x & 1) == 1);
 }
 
-pair<number, number> factorise(const number &n, const number &base)
-{
-    if(n != 0)
-    {
-        tuple<number, number, bool> r = find_next_digits(n, 0, 0, 0, base, base, 1, 0);
-
-        return make_pair(get<0>(r), get<1>(r));
-    }
-    else
-    {
-        return make_pair(1, 0);
-    }
-}
-
 void usage(char *name, bool prime_base, bool trial_division)
 {
     cout << "usage:" << endl;

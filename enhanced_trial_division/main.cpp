@@ -26,7 +26,7 @@
 
 using namespace std;
 
-tuple<number, number, bool> find_next_digits(const number &n, const digit_counter &current_digit, const number &first_factor_so_far, const number &second_factor_so_far, const number &base, const number &current_base, const number &previous_base, const number &carry)
+pair<number, number> factorise(const number &n, const number &base)
 {
     vector<number> possible_first_digits;
     vector<number> increments;
@@ -91,7 +91,7 @@ trial_division:
     {
         if(n % x == 0)
         {
-            return make_tuple(x, n / x, true);
+            return make_pair(x, n / x);
         }
 
         current_increment++;
@@ -102,7 +102,7 @@ trial_division:
         }
     }
 
-    return make_tuple(1, n, false);
+    return make_pair(1, n);
 }
 
 int main(int argc, char *argv[])

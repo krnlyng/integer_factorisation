@@ -34,8 +34,9 @@ endif
 
 .PHONY: release clean
 
-release: CFLAGS += -O3
-release: CXXFLAGS += -O3
+release: CFLAGS += -O3 -flto
+release: CXXFLAGS += -O3 -flto
+release: LDFLAGS += -flto
 release: $(OUT)
 
 clean:

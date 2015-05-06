@@ -85,35 +85,34 @@ inline void set_digit(number &x, const number &digit, const number &digit_base)
 }
 
 /* this function returns the digit_number-th digit of x in base base) */
-inline number get_digit(const number &x, const digit_counter &digit_number, const number &base)
+inline number get_digit(const number &x, const number &digit_base, const number &base)
 {
-    if(base == 2)
-    {
-        return (x >> digit_number) & 1;
-    }
-    else
-    {
-        return (x / my_pow(base, digit_number)) % base;
-    }
+    return (x / digit_base) % base;
 }
 
 /* this function checks if the new digits solve the digit equation for digit number current_digit
  * and returns a pair consisting of the check and the new carry */
-inline std::pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n, const number &first_factor_so_far, const number &second_factor_so_far, const number &carry, const digit_counter &current_digit, const number &base)
+inline std::pair<bool, number> check_if_new_digits_solve_digit_equation(const number &n, const number &first_factor_so_far, const number &second_factor_so_far, const number &carry, const digit_counter &current_digit, const number &base, const number &previous_base)
 {
     number tmp = 0;
     number new_carry = 0;
 
+    number lower_base = 1;
+    number upper_base = previous_base;
+
     for(digit_counter i = 0;i <= current_digit;i++)
     {
-        tmp += get_digit(first_factor_so_far, i, base) * get_digit(second_factor_so_far, current_digit - i, base);
+        tmp += get_digit(first_factor_so_far, lower_base, base) * get_digit(second_factor_so_far, upper_base, base);
+
+        lower_base *= base;
+        upper_base /= base;
     }
 
     tmp += carry;
 
     new_carry = tmp / base;
     
-    if(tmp % base == get_digit(n, current_digit, base))
+    if(tmp % base == get_digit(n, previous_base, base))
     {
         return std::make_pair(true, new_carry);
     }

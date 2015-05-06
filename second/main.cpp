@@ -41,7 +41,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
             set_digit(a, first_factor_digit, previous_base);
             set_digit(b, second_factor_digit, previous_base);
 
-            check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base);
+            check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base, previous_base);
 
             if(check.first)
             {

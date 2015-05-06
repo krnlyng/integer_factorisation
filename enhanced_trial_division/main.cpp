@@ -46,7 +46,7 @@ inline void find_possible_factor_residuals(const number &n, const digit_counter 
                 break;
             }
 
-            check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base);
+            check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base, previous_base);
 
             if(check.first)
             {

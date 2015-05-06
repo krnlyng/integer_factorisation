@@ -44,7 +44,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
     {
         a = first_factor_so_far;
         set_digit(a, first_factor_digit, previous_base);
-        a_0th_digit = get_digit(a, 0, base);
+        a_0th_digit = get_digit(a, 1, base);
 
         if(a_0th_digit == 0)
         {
@@ -54,7 +54,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
                 b = second_factor_so_far;
                 set_digit(b, second_factor_digit, previous_base);
 
-                check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base);
+                check = check_if_new_digits_solve_digit_equation(n, a, b, carry, current_digit, base, previous_base);
 
                 if(check.first)
                 {
@@ -85,12 +85,15 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
         }
         else
         {
+            number lower_base = base;
+            number upper_base = previous_base / base;
+
             b = second_factor_so_far;
-            tmp = first_factor_digit * get_digit(b, 0, base);
+            tmp = first_factor_digit * get_digit(b, 1, base);
 
             for(digit_counter i = 1;i < current_digit;i++)
             {
-                tmp += get_digit(a, current_digit - i, base) * get_digit(b, i, base);
+                tmp += get_digit(a, upper_base, base) * get_digit(b, lower_base, base);
             }
 
             inverse = find_inverse(a_0th_digit, base);
@@ -98,7 +101,7 @@ tuple<number, number, bool> find_next_digits(const number &n, const digit_counte
             if(inverse.first)
             {
                 tmp += carry;
-                second_factor_digit = (inverse.second * (get_digit(n, current_digit, base) - tmp)) % base;
+                second_factor_digit = (inverse.second * (get_digit(n, previous_base, base) - tmp)) % base;
 
                 while(second_factor_digit < 0) second_factor_digit += base;
 

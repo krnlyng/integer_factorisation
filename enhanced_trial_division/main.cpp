@@ -26,7 +26,7 @@
 
 using namespace std;
 
-void find_possible_factor_residuals(const number &n, const digit_counter &current_digit, vector<number> &possible_factor_residuals, const number &base, const number &first_factor_so_far, const number &second_factor_so_far, const digit_counter &steps, const number &carry, const number &previous_base)
+inline void find_possible_factor_residuals(const number &n, const digit_counter &current_digit, vector<number> &possible_factor_residuals, const number &base, const number &first_factor_so_far, const number &second_factor_so_far, const digit_counter &steps, const number &carry, const number &previous_base)
 {
     number a, b;
     pair<bool, number> check;

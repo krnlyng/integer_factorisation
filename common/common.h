@@ -41,12 +41,6 @@ int common_main(int argc, char *argv[], bool prime_base, bool trial_division, bo
 
 /* this function returns x^y */
 #if USE_GMP
-inline number my_pow(const number &x, const digit_counter &y)
-{
-    mpz_class r;
-    mpz_pow_ui(r.get_mpz_t(), x.get_mpz_t(), y);
-    return r;
-}
 inline number my_sqrt(const number &x)
 {
     mpz_class r;
@@ -55,7 +49,6 @@ inline number my_sqrt(const number &x)
 }
 #else
 #include <cmath>
-#define my_pow(...) (number)pow(__VA_ARGS__)
 #define my_sqrt(...) (number)sqrt(__VA_ARGS__)
 #endif
 

@@ -70,10 +70,10 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     vector<number>::size_type current_increment = 0;
     number start_number;
 
-    if(n % base == 0)
+    if(n % base == 0 && steps == 1)
     {
 #if DEBUG
-        cout << "hint: n modulo base == 0, cannot skip numbers, try another base!" << endl;
+        cout << "hint: n modulo base == 0 and steps == 1, cannot skip numbers, try another base!" << endl;
 #endif
         start_number = 2;
         increments.push_back(1);

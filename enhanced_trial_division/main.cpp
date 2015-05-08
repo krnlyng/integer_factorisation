@@ -70,7 +70,9 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
 
     if(n % base == 0)
     {
+#if DEBUG
         cout << "hint: n modulo base == 0, cannot skip numbers, try another base!" << endl;
+#endif
         possible_factor_residuals.push_back(2);
         increments.push_back(1);
         goto trial_division;
@@ -82,7 +84,9 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     }
     else
     {
+#if DEBUG
         cout << "hint: base is prime, cannot skip numbers, try another base!" << endl;
+#endif
         possible_factor_residuals.push_back(2);
         increments.push_back(1);
         goto trial_division;

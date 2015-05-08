@@ -21,6 +21,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <cassert>
 
 #include "../common/common.h"
 
@@ -105,6 +106,8 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
 
         increments.push_back(increment);
     }
+
+    assert(increments.size() == possible_factor_residuals.size());
 
     while(current_increment < possible_factor_residuals.size() && possible_factor_residuals[current_increment] < 2)
     {

@@ -17,6 +17,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef __COMMON_H__
+#define __COMMON_H__
+
 #include <iostream>
 #include <tuple>
 
@@ -112,4 +115,6 @@ inline std::pair<bool, number> check_if_new_digits_solve_digit_equation(const nu
 
     return std::make_pair(false, 0);
 }
+
+#endif /* __COMMON_H__ */
 

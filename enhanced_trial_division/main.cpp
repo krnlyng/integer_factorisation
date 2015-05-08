@@ -43,6 +43,8 @@ inline void find_possible_factor_residuals(const number &n, const digit_counter 
 
             if(a * b > n)
             {
+                if(a < n) possible_factor_residuals.push_back(a);
+                if(b < n) possible_factor_residuals.push_back(b);
                 break;
             }
 

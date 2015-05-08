@@ -31,10 +31,9 @@ inline void find_possible_factor_residuals(const number &n, const digit_counter 
     number a, b;
     pair<bool, number> check;
 
-    /* a_digit == 0 and b_digit == 0 cases are already done */
-    for(number a_digit = 1;a_digit < base;a_digit++)
+    for(number a_digit = 0;a_digit < base;a_digit++)
     {
-        for(number b_digit = 1;b_digit < base;b_digit++)
+        for(number b_digit = 0;b_digit < base;b_digit++)
         {
             a = first_factor_so_far;
             b = second_factor_so_far;
@@ -50,12 +49,14 @@ inline void find_possible_factor_residuals(const number &n, const digit_counter 
 
             if(check.first)
             {
-                possible_factor_residuals.push_back(a);
-                possible_factor_residuals.push_back(b);
-
                 if(current_digit + 1 < steps)
                 {
                     find_possible_factor_residuals(n, current_digit + 1, possible_factor_residuals, base, a, b, steps, check.second, previous_base * base);
+                }
+                else
+                {
+                    possible_factor_residuals.push_back(a);
+                    possible_factor_residuals.push_back(b);
                 }
             }
         }

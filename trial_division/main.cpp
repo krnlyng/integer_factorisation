@@ -39,6 +39,6 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
 
 int main(int argc, char *argv[])
 {
-    common_main(argc, argv, false, true, false);
+    return common_main(argc, argv, false, true, false);
 }
 

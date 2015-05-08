@@ -67,13 +67,14 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     vector<number> possible_factor_residuals;
     vector<number> increments;
     vector<number>::size_type current_increment = 0;
+    number start_number;
 
     if(n % base == 0)
     {
 #if DEBUG
         cout << "hint: n modulo base == 0, cannot skip numbers, try another base!" << endl;
 #endif
-        possible_factor_residuals.push_back(2);
+        start_number = 2;
         increments.push_back(1);
         goto trial_division;
     }
@@ -87,7 +88,7 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
 #if DEBUG
         cout << "hint: base is prime, cannot skip numbers, try another base!" << endl;
 #endif
-        possible_factor_residuals.push_back(2);
+        start_number = 2;
         increments.push_back(1);
         goto trial_division;
     }
@@ -113,8 +114,11 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     cout << "calculated increments." << endl;
 #endif
 
+    start_number = possible_factor_residuals[current_increment];
+    possible_factor_residuals.clear();
+
 trial_division:
-    for(number x = possible_factor_residuals[current_increment];x <= my_sqrt(n);)
+    for(number x = start_number;x <= my_sqrt(n);)
     {
         if(n % x == 0)
         {

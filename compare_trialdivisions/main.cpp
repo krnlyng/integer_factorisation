@@ -36,12 +36,13 @@ void compare_usage(char *name)
 {
     cout << "usage:" << endl;
     cout << name << " steps base maxnum" << endl;
-    cout << "steps\tis the maximum number of steps of finding digits in the enhanced" << endl;
-    cout << "\ttrial division algorithm should be done must be greater or equal to 1." << endl;
-    cout << "base\tis the base with which the enhanced trial division algorithm should work" << endl;
-    cout << "\tmust be greater or equal to 2." << endl;
-    cout << "maxnum\tis the number until which the trial divisions should be compared must be" << endl;
-    cout << "\tgreater than zero." << endl;
+    cout << "steps\tIs the maximum number of steps of finding digits in the enhanced" << endl;
+    cout << "\ttrial division algorithm which should be done. Must be greater or equal" << endl;
+    cout << "\tto 1." << endl;
+    cout << "base\tIs the base with which the enhanced trial division algorithm should work" << endl;
+    cout << "\t. Must be greater or equal to 2." << endl;
+    cout << "maxnum\tIs the number until which the trial divisions should be compared. Must" << endl;
+    cout << "\tbe greater than zero." << endl;
 }
 
 int main(int argc, char *argv[])

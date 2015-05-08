@@ -52,11 +52,11 @@ void usage(char *name, bool prime_base, bool trial_division, bool use_steps)
     else if(use_steps)
     {
         cout << name << " [base [steps]] number" << endl;
-        cout << "\tbase\tis the base with which the algorithm should calculate, if not" << endl;
+        cout << "\tbase\tIs the base with which the algorithm should calculate, if not" << endl;
         cout << "\t\tspecified base = 2 will be used." << endl;
-        cout << "\tnumber\tis the number which shall be factorised." << endl;
-        cout << "\tsteps\tis the number of iterations for the digit determination which" << endl;
-        cout << "\t\tshould be done, if not specified steps = 1 will be used" << endl;
+        cout << "\tnumber\tIs the number which shall be factorised." << endl;
+        cout << "\tsteps\tIs the number of iterations for the digit determination which" << endl;
+        cout << "\t\tshould be done, if not specified steps = 1 will be used." << endl;
         cout << "base must be greater than or equal to 2." << endl;
         cout << "steps must be positive." << endl;
     }

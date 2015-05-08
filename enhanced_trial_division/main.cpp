@@ -108,12 +108,14 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     cout << "calculated increments." << endl;
 
 trial_division:
-    for(number x = possible_factor_residuals[current_increment];x <= my_sqrt(n);x+=increments[current_increment])
+    for(number x = possible_factor_residuals[current_increment];x <= my_sqrt(n);)
     {
         if(n % x == 0)
         {
             return make_pair(x, n / x);
         }
+
+        x += increments[current_increment];
 
         current_increment++;
 

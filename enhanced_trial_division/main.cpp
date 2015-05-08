@@ -112,6 +112,14 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     }
 
 #if DEBUG
+    for(vector<number>::size_type i=0;i < possible_factor_residuals.size();i++)
+    {
+        cout << "possible factor residual: " << possible_factor_residuals[i] << endl;
+        cout << "increment: " << increments[i] << endl;
+    }
+#endif
+
+#if DEBUG
     cout << "calculated increments." << endl;
 #endif
 

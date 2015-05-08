@@ -126,7 +126,16 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
     cout << "calculated increments." << endl;
 #endif
 
-    start_number = possible_factor_residuals[current_increment];
+    if(current_increment < possible_factor_residuals.size())
+    {
+        start_number = possible_factor_residuals[current_increment];
+    }
+    /* this happens if n == 1 */
+    else
+    {
+        start_number = 2;
+    }
+
     possible_factor_residuals.clear();
 
 trial_division:

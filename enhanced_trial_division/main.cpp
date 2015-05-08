@@ -105,7 +105,9 @@ pair<number, number> factorise(const number &n, const number &base, const digit_
         current_increment++;
     }
 
+#if DEBUG
     cout << "calculated increments." << endl;
+#endif
 
 trial_division:
     for(number x = possible_factor_residuals[current_increment];x <= my_sqrt(n);)

@@ -27,7 +27,7 @@ bool is_prime(const number &n)
 {
     if(n == 1) return false;
 
-    for(number i = 2; i <= sqrt(n);i++)
+    for(number i = 2; i <= my_sqrt(n);i++)
     {
         if(n % i == 0) return false;
     }

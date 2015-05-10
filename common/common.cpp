@@ -35,11 +35,15 @@ bool is_prime(const number &n)
     return true;
 }
 
-/* this function returns true if x is odd and false otherwise */
-bool is_odd(const number &x)
+#if USE_GMP
+number my_rand(gmp_randstate_t r_state, number a, number b)
 {
-    return ((x & 1) == 1);
+    mpz_class r;
+    mpz_class limit = b + 1 - a;
+    mpz_urandomm(r.get_mpz_t(), r_state, limit.get_mpz_t());
+    return r + a;
 }
+#endif
 
 void usage(char *name, bool prime_base, bool trial_division, bool use_steps)
 {

@@ -26,15 +26,27 @@
 #if USE_GMP
 #include <gmpxx.h>
 typedef mpz_class number;
+typedef mpf_class float_number;
 typedef unsigned long int digit_counter;
 #else
 typedef unsigned long long int number;
+typedef long double float_number;
 typedef unsigned long int digit_counter;
 #endif
 
 bool is_prime(const number &n);
 
-bool is_odd(const number &x);
+/* this function returns true if x is even and false otherwise */
+inline bool is_even(const number &n)
+{
+    return (n % 2 == 0);
+}
+
+/* this function returns true if x is odd and false otherwise */
+inline bool is_odd(const number &n)
+{
+    return (n % 2 != 0);
+}
 
 extern std::pair<number, number> factorise(const number &n, const number &base = 2, const digit_counter &steps = 1);
 
@@ -50,9 +62,23 @@ inline number my_sqrt(const number &x)
     mpz_sqrt(r.get_mpz_t(), x.get_mpz_t());
     return r;
 }
+inline number my_root(const number &x, const digit_counter &p)
+{
+    mpz_class r;
+    mpz_root(r.get_mpz_t(), x.get_mpz_t(), p);
+    return r;
+}
+inline number my_pow(const number &x, const digit_counter &y)
+{
+    mpz_class r;
+    mpz_pow_ui(r.get_mpz_t(), x.get_mpz_t(), y);
+    return r;
+}
 #else
 #include <cmath>
 #define my_sqrt(...) (number)sqrt(__VA_ARGS__)
+#define my_root(x, p) (number)pow(x, p)
+#define my_pow(...) (number)pow(__VA_ARGS__)
 #endif
 
 /* this function finds the inverse of x modulo mod if it exists */
@@ -114,6 +140,23 @@ inline std::pair<bool, number> check_if_new_digits_solve_digit_equation(const nu
     }
 
     return std::make_pair(false, 0);
+}
+
+#if USE_GMP
+number my_rand(gmp_randstate_t r_state, number a, number b);
+#endif
+
+/* this function returns the number of digits of x in base base */
+inline digit_counter num_of_digits(number x, const number &base)
+{
+    digit_counter digits = 0;
+
+    while(x) {
+        x /= base;
+        digits++;
+    }
+
+    return digits;
 }
 
 #endif /* __COMMON_H__ */

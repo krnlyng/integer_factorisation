@@ -19,8 +19,8 @@ void usage(char *name)
 
 pair<number, number> rand_factorise(const number &n, const digit_counter &p)
 {
-    number s, t;
-    number prev_s, prev_t;
+    number s = 0, t = 0;
+    number prev_s = 0, prev_t = 0;
  
 #if USE_GMP
     gmp_randstate_t rand_state;

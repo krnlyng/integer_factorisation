@@ -38,7 +38,7 @@ pair<number, number> rand_factorise(const number &n, const digit_counter &p)
 
     goto roll_dice;
 
-    while(s * t != n)
+    while(s * t != n || s == 1 || t == 1)
     {
         prev_s = s;
         prev_t = t;
@@ -59,14 +59,6 @@ pair<number, number> rand_factorise(const number &n, const digit_counter &p)
         {
 #if DEBUG
             cout << "loop" << endl;
-#endif
-            goto roll_dice;
-        }
-
-        if(s == 1 || t == 1)
-        {
-#if DEBUG
-            cout << "trivial factorisation" << endl;
 #endif
             goto roll_dice;
         }

@@ -43,7 +43,7 @@ pair<number, number> rand_factorise(const number &n, const digit_counter &p)
         prev_s = s;
         prev_t = t;
 
-        s = (s * t) / my_root(my_pow(s, p) + my_pow(t, p), p);
+        s = 1.f / (1.f / static_cast<float_number>(my_pow(s, p)) + 1.f / static_cast<float_number>(my_pow(t, p)));
 
         if(s == 0)
         {

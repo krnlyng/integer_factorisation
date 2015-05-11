@@ -88,7 +88,7 @@ inline std::pair<bool, number> find_inverse(const number &x, const number &mod)
     mpz_class r;
     int b = mpz_invert(r.get_mpz_t(), x.get_mpz_t(), mod.get_mpz_t());
 
-    return ((b != 0) ? std::make_pair(true, r) : std::make_pair(false, 0));
+    return ((b != 0) ? std::make_pair(true, r) : std::make_pair(false, static_cast<number>(0)));
 #else
     for(number k = 1;k < mod;k++)
     {
@@ -151,7 +151,7 @@ inline digit_counter num_of_digits(number x, const number &base)
 {
     digit_counter digits = 0;
 
-    while(x) {
+    while(x > 0) {
         x /= base;
         digits++;
     }

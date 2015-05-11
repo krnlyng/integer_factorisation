@@ -99,7 +99,7 @@ roll_dice:
 
 std::pair<number, number> factorise(const number &n, const number &base, const digit_counter &steps)
 {
-    return make_pair(1, n);
+    return rand_factorise(n, 1);
 }
 
 int main(int argc, char *argv[])

@@ -97,6 +97,11 @@ roll_dice:
     return make_pair(s, t);
 }
 
+std::pair<number, number> factorise(const number &n, const number &base, const digit_counter &steps)
+{
+    return make_pair(1, n);
+}
+
 int main(int argc, char *argv[])
 {
     number n;

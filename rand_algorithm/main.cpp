@@ -88,7 +88,7 @@ roll_dice:
             s_digits = num_of_digits(s, 10);
             t_digits = num_of_digits(t, 10);
         }
-        while(s_digits + t_digits != n_digits || s == 1 || t == 1);
+        while((s_digits + t_digits - 1 != n_digits && s_digits + t_digits != n_digits) || s == 1 || t == 1);
 #if DEBUG
         cout << "done." << endl;
 #endif

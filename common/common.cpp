@@ -40,6 +40,10 @@ number my_rand(gmp_randstate_t r_state, number a, number b)
 {
     mpz_class r;
     mpz_class limit = b + 1 - a;
+    if(limit <= 0)
+    {
+        limit = 1;
+    }
     mpz_urandomm(r.get_mpz_t(), r_state, limit.get_mpz_t());
     return r + a;
 }

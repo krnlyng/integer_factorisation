@@ -1,0 +1,5 @@
+*.d
+*.o
+ltbnjf_factorisation
+gmon.out
+
